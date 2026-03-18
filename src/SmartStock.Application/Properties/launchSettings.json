@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "SmartStock.Application": {
+      "commandName": "Project"
+    },
+    "webApi": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\Projects\\SmartStock\\src\\SmartStock.WebAPI",
+      "authenticationMode": "None"
+    }
+  }
+}

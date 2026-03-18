@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:16
+    container_name: smartstock-db
+    environment:
+      POSTGRES_DB: smartstock
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - smartstock_pg:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: src/SmartStock.WebAPI/Dockerfile
+    container_name: smartstock-api
+    depends_on:
+      - db
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Host=db;Port=5432;Database=smartstock;Username=postgres;Password=postgres
+      Jwt__Issuer: SmartStock
+      Jwt__Audience: SmartStock
+      Jwt__Key: CHANGE_ME_TO_LONG_RANDOM_SECRET_KEY_32CHARS_MIN
+      Jwt__ExpMinutes: 120
+      Seed__AdminUserName: admin
+      Seed__AdminPassword: Admin123!
+    ports:
+      - "8080:8080"
+
+volumes:
+  smartstock_pg:
+

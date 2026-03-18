@@ -1,0 +1,6 @@
+@SmartStock.WebAPI_HostAddress = http://localhost:5157
+
+GET {{SmartStock.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
