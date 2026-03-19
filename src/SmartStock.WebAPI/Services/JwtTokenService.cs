@@ -13,7 +13,13 @@ public interface IJwtTokenService
     Task<string> CreateTokenAsync(ApplicationUser user);
 }
 
-public record JwtOptions(string Issuer, string Audience, string Key, int ExpMinutes);
+public class JwtOptions
+{
+    public string Issuer { get; set; } = string.Empty;
+    public string Audience { get; set; } = string.Empty;
+    public string Key { get; set; } = string.Empty;
+    public int ExpMinutes { get; set; }
+}
 
 public class JwtTokenService : IJwtTokenService
 {

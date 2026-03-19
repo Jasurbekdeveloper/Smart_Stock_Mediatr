@@ -6,6 +6,17 @@ using SmartStock.Infrastructure.Persistence;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()   // Hamma joydan ruxsat berish (Development uchun)
+              .AllowAnyMethod()   // GET, POST, PUT, DELETE va h.k.
+              .AllowAnyHeader();  // Har qanday headerlarga ruxsat
+    });
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -60,6 +71,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+app.UseCors("AllowAll"); 
 
 app.UseAuthentication();
 app.UseAuthorization();
